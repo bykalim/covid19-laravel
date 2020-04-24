@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Auth::routes();
+
+Route::get('/home', function (){
+    return view('home');
+})->name('home');
+
+Route::namespace('Admin')->group(function (){
+    Route::resource('admin', 'AdminController')->only('index', 'edit');
 });
